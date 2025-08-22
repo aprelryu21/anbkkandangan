@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Sekolah - ANBK & Bioportal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/826/269/181/persona-5-video-games-persona-series-wallpaper-preview.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff6b6b;
+            text-shadow: 4px 4px 0px #000000;
+            letter-spacing: -1px;
+        }
+        
+        .input-card {
+            background-color: #ffd93d;
+            border: 6px solid #000000;
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 12px 12px 0px #000000;
+            width: 100%;
+            max-width: 500px;
+            transform: rotate(-1deg);
+        }
+        
+        .input-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 4px solid #000000;
+            border-radius: 0;
+            background-color: #ffffff;
+            color: #000000;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            background-color: #f0f0f0;
+            box-shadow: 4px 4px 0px #ff6b6b;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background-color: #ff6b6b;
+            color: #ffffff;
+            border: 4px solid #000000;
+            border-radius: 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.1s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff5252;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000000;
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 2px 2px 0px #000000;
+        }
+        
+        .school-card {
+            background-color: #6c5ce7;
+            border: 6px solid #000000;
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 16px 16px 0px #000000;
+            width: 100%;
+            max-width: 700px;
+            transform: rotate(1deg);
+            margin-bottom: 20px;
+        }
+        
+        .school-name {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000000;
+        }
+        
+        .proktor-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffd93d;
+            margin-bottom: 32px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+        
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+        
+        .credential-card {
+            background-color: #00cec9;
+            border: 4px solid #000000;
+            border-radius: 0;
+            padding: 24px;
+            box-shadow: 8px 8px 0px #000000;
+            transform: rotate(-0.5deg);
+        }
+        
+        .credential-card:nth-child(2) {
+            transform: rotate(0.5deg);
+            background-color: #fd79a8;
+        }
+        
+        .website-link {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 4px;
+        }
+        
+        .website-link:hover {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 4px 8px;
+            margin: -4px -8px 12px -8px;
+        }
+        
+        .credential-item {
+            margin-bottom: 12px;
+        }
+        
+        .credential-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000000;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .credential-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000000;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 12px;
+            border: 2px solid #000000;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+        
+        .save-btn {
+            background-color: #00b894;
+            color: #ffffff;
+            border: 4px solid #000000;
+            border-radius: 0;
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 24px auto;
+            transition: all 0.1s ease;
+            width: 100%;
+            max-width: 500px;
+            display: block;
+        }
+        
+        .save-btn:hover {
+            background-color: #00a085;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000000;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            max-width: 500px;
+            margin: 16px auto 0 auto;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            border: 4px solid #000000;
+            border-radius: 0;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.1s ease;
+        }
+        
+        .back-nav {
+            background-color: #ffd93d;
+            color: #000000;
+            flex: 30;
+        }
+        
+        .next-nav {
+            background-color: #ff6b6b;
+            color: #ffffff;
+            flex: 70;
+        }
+        
+        .nav-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .back-nav:hover {
+            background-color: #ffed4e;
+        }
+        
+        .next-nav:hover {
+            background-color: #ff5252;
+        }
+        
+        .back-btn {
+            background-color: #ffd93d;
+            color: #000000;
+            border: 4px solid #000000;
+            border-radius: 0;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 24px;
+            transition: all 0.1s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #ffed4e;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 32px;
+        }
+        
+        .team-card {
+            background-color: #74b9ff;
+            border: 6px solid #000000;
+            border-radius: 0;
+            padding: 24px;
+            box-shadow: 12px 12px 0px #000000;
+            transform: rotate(-0.5deg);
+        }
+        
+        .team-card:nth-child(2) {
+            transform: rotate(0.5deg);
+            background-color: #fd79a8;
+        }
+        
+        .team-card:nth-child(3) {
+            transform: rotate(0.3deg);
+            background-color: #fdcb6e;
+        }
+        
+        .team-card:nth-child(4) {
+            transform: rotate(-0.3deg);
+            background-color: #6c5ce7;
+        }
+        
+        .team-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .team-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .info-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 3px solid #000000;
+            padding: 12px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000000;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .info-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #000000;
+            word-break: break-word;
+        }
+        
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background-color: #ff6b6b;
+            border: 6px solid #000000;
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 16px 16px 0px #000000;
+            max-width: 500px;
+            text-align: center;
+            transform: rotate(-1deg);
+        }
+        
+        .popup-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000000;
+        }
+        
+        .popup-message {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        
+        .popup-btn {
+            background-color: #ffd93d;
+            color: #000000;
+            border: 4px solid #000000;
+            border-radius: 0;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        .popup-btn:hover {
+            background-color: #ffed4e;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .social-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 32px;
+        }
+        
+        .social-card {
+            border: 6px solid #000000;
+            border-radius: 0;
+            padding: 32px;
+            box-shadow: 12px 12px 0px #000000;
+            text-align: center;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+        }
+        
+        .social-card:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 16px 16px 0px #000000;
+        }
+        
+        .social-card.youtube {
+            background-color: #ff0000;
+            transform: rotate(1deg);
+        }
+        
+        .social-card.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            transform: rotate(-0.5deg);
+        }
+        
+        .social-card.tiktok {
+            background-color: #000000;
+            transform: rotate(0.8deg);
+        }
+        
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .social-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000000;
+            margin-bottom: 8px;
+        }
+        
+        .social-handle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffd93d;
+            margin-bottom: 24px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+        
+        .social-btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 4px solid #000000;
+            border-radius: 0;
+            text-transform: uppercase;
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+        
+        .youtube-btn {
+            background-color: #ffffff;
+            color: #ff0000;
+        }
+        
+        .youtube-btn:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .instagram-btn {
+            background-color: #ffffff;
+            color: #e6683c;
+        }
+        
+        .instagram-btn:hover {
+            background-color: #e6683c;
+            color: #ffffff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .tiktok-btn {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        .tiktok-btn:hover {
+            background-color: #ff0050;
+            color: #ffffff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                flex: none;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .school-name {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Halaman Input -->
+        <div id="inputPage">
+            <h1 class="title">🏫 Portal Sekolah</h1>
+            <div class="input-card">
+                <div class="input-label">Masukan Nama Sekolah</div>
+                <input type="text" id="schoolInput" class="input-field" placeholder="Contoh: SDN MEDOWO 1">
+                <button onclick="searchSchool()" class="submit-btn">🔍 Cari Sekolah</button>
+            </div>
+        </div>
+        
+        <!-- Halaman Detail Sekolah -->
+        <div id="detailPage" class="hidden">
+            <div class="school-card">
+                <div class="school-name" id="schoolName"></div>
+                <div class="proktor-name">👨‍🏫 Proktor: <span id="proktorName"></span></div>
+                
+                <div class="credentials-grid">
+                    <div class="credential-card">
+                        <a href="https://anbk.kemdikbud.go.id/" target="_blank" class="website-link">🌐 ANBK Kemdikbud</a>
+                        <div class="credential-item">
+                            <div class="credential-label">Username ANBK</div>
+                            <div class="credential-value" id="userAnbk"></div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-label">Password ANBK</div>
+                            <div class="credential-value" id="passAnbk"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="credential-card">
+                        <a href="https://bioportal.kemdikbud.go.id/" target="_blank" class="website-link">🧬 Bioportal Kemdikbud</a>
+                        <div class="credential-item">
+                            <div class="credential-label">Username Bioportal</div>
+                            <div class="credential-value" id="userBio"></div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-label">Password Bioportal</div>
+                            <div class="credential-value" id="passBio"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="saveAsImage()" class="save-btn">💾 SIMPAN</button>
+                
+                <div class="navigation-buttons">
+                    <button onclick="goBack()" class="nav-btn back-nav">⬅️ Kembali</button>
+                    <button onclick="goToTeamPage()" class="nav-btn next-nav">➡️ Lanjut</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Halaman Tim ANBK -->
+        <div id="teamPage" class="hidden">
+            <h1 class="title">👥 Data Tim ANBK 2025 Kec Kandangan</h1>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-title">👨‍💼 Penanggung Jawab</div>
+                    <div class="team-info">
+                        <div class="info-item">
+                            <div class="info-label">Nama</div>
+                            <div class="info-value" id="namaPJ"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">NIP</div>
+                            <div class="info-value" id="nipPJ"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-title">👨‍🏫 Proktor ANBK</div>
+                    <div class="team-info">
+                        <div class="info-item">
+                            <div class="info-label">Nama</div>
+                            <div class="info-value" id="namaProktor"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email Sekolah</div>
+                            <div class="info-value" id="emailSekolah"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-title">🔧 Teknisi ANBK</div>
+                    <div class="team-info">
+                        <div class="info-item">
+                            <div class="info-label">Nama</div>
+                            <div class="info-value" id="namaTeknisi"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email Teknisi</div>
+                            <div class="info-value" id="emailTeknisi"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-title">👮‍♂️ Pengawas ANBK</div>
+                    <div class="team-info">
+                        <div class="info-item">
+                            <div class="info-label">Nama</div>
+                            <div class="info-value" id="namaPengawas"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">NIP</div>
+                            <div class="info-value" id="nipPengawas"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Bertugas Di</div>
+                            <div class="info-value" id="tugasPengawas"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button onclick="goBackToDetail()" class="nav-btn back-nav">⬅️ Kembali ke Detail</button>
+                <button onclick="goToSocialPage()" class="nav-btn next-nav">➡️ Sosial Media</button>
+            </div>
+        </div>
+        
+        <!-- Halaman Sosial Media -->
+        <div id="socialPage" class="hidden">
+            <h1 class="title">📱 Sosial Media</h1>
+            <div class="social-container">
+                <div class="social-card youtube">
+                    <div class="social-icon">🎥</div>
+                    <div class="social-name">YouTube</div>
+                    <div class="social-handle">@aprelryu</div>
+                    <a href="https://youtube.com/aprelryu" target="_blank" class="social-btn youtube-btn">
+                        Kunjungi Channel
+                    </a>
+                </div>
+                
+                <div class="social-card instagram">
+                    <div class="social-icon">📸</div>
+                    <div class="social-name">Instagram</div>
+                    <div class="social-handle">@aprelryu</div>
+                    <a href="https://www.instagram.com/aprelryu" target="_blank" class="social-btn instagram-btn">
+                        Follow Instagram
+                    </a>
+                </div>
+                
+                <div class="social-card tiktok">
+                    <div class="social-icon">🎵</div>
+                    <div class="social-name">TikTok</div>
+                    <div class="social-handle">@aprelryu</div>
+                    <a href="https://tiktok.com/@aprelryu" target="_blank" class="social-btn tiktok-btn">
+                        Follow TikTok
+                    </a>
+                </div>
+            </div>
+            
+            <button onclick="goBackToTeam()" class="back-btn">⬅️ Kembali ke Tim ANBK</button>
+        </div>
+    </div>
+    
+    <!-- Popup Error -->
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <div class="popup-title">❌ Data Tidak Ditemukan</div>
+            <div class="popup-message">
+                Nama sekolah yang Anda masukkan tidak ada dalam database atau salah penulisan. 
+                <br><br>
+                Silakan coba inputkan ulang dengan benar.
+            </div>
+            <button onclick="closePopup()" class="popup-btn">Coba Lagi</button>
+        </div>
+    </div>
+
+    <script>
+        // Database sekolah
+        const schoolDatabase = [
+  {
+    "NO": "1",
+    "NAMA SEKOLAH": "SDN KANDANGAN 1",
+    "NAMA PROKTOR": "EMY KUSUMAWATI, S.Pd.",
+    "EMAIL SEKOLAH": "sdn.kand1@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "SUNARKO PRASETYO, S.Pd.",
+    "NIP PENANGGUNGJAWAB": "198906122014022004",
+    "NAMA TEKNISI": "ELFRIDUS M.L. AMA HELAN, S.Pd.",
+    "EMAIL TEKNISI": "elfridusama@gmail.com",
+    "NAMA PENGAWAS": "AGUSTIN MILA IKA MUNAWAROH, S.Pd.",
+    "NIP PENGAWAS": "19850826 202321 2 013",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220525",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220525",
+    "PASS BIOANSD": "20512627"
+  },
+  {
+    "NO": "2",
+    "NAMA SEKOLAH": "SDN KANDANGAN 2",
+    "NAMA PROKTOR": "NANING SUGIARTI",
+    "EMAIL SEKOLAH": "kandangan2.sdn@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "BAGUS WAFI'UDIN PRIAMBODO, S. Pd.",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220526",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220526",
+    "PASS BIOANSD": "20512626"
+  },
+  {
+    "NO": "3",
+    "NAMA SEKOLAH": "SDN KANDANGAN 3",
+    "NAMA PROKTOR": "NOVARISA ACA FUROIKHA, A.Md",
+    "EMAIL SEKOLAH": "sdn3.kandangankdri@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "PUTRI PUSPITA SARI, S.Pd.",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220527",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220527",
+    "PASS BIOANSD": "20512625"
+  },
+  {
+    "NO": "4",
+    "NAMA SEKOLAH": "SDN KANDANGAN 4",
+    "NAMA PROKTOR": "Mustika Damayanthi, S.Pd",
+    "EMAIL SEKOLAH": "sdn.kandangan4@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "SRI RETNO WIDAYATI, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "196608141989042001",
+    "NAMA TEKNISI": "NINIK SULIS SETIANI, S.Pd",
+    "EMAIL TEKNISI": "nsulistian@gmail.com",
+    "NAMA PENGAWAS": "Agus Anggara Putra, S.Pd",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220528",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220528",
+    "PASS BIOANSD": "20554547"
+  },
+  {
+    "NO": "5",
+    "NAMA SEKOLAH": "SDN BANARAN 1",
+    "NAMA PROKTOR": "Elma Nurita",
+    "EMAIL SEKOLAH": "sdnbanaransiji@yahoo.com",
+    "NAMA PENANGGUNGJAWAB": "ANNY WALUYOWATI, S.Pd",
+    "NIP PENANGGUNGJAWAB": "19790616 201001 2 015",
+    "NAMA TEKNISI": "MOCHAMAD MIZAN ANSORI, S.Pd",
+    "EMAIL TEKNISI": "mochamadmizan@gmail.com",
+    "NAMA PENGAWAS": "DWI KURNIA PUTRI, S.Or",
+    "NIP PENGAWAS": "19880727 201101 2 014",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220529",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220529",
+    "PASS BIOANSD": "20512815"
+  },
+  {
+    "NO": "6",
+    "NAMA SEKOLAH": "SDN BANARAN 2",
+    "NAMA PROKTOR": "SILVIA YUNITA",
+    "EMAIL SEKOLAH": "sdnegeribanaran2@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "MARWAN, S.Pd.,M.Si.",
+    "NIP PENANGGUNGJAWAB": "196509201987031018",
+    "NAMA TEKNISI": "BELLA CENDIKIA HAPSARI, S.Pd.",
+    "EMAIL TEKNISI": "cendikiabella@gmail.com",
+    "NAMA PENGAWAS": "ROSY IKE NUR TETASARI, S.Pd",
+    "NIP PENGAWAS": "19880417 202221 2 001",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220530",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220530",
+    "PASS BIOANSD": "20512816"
+  },
+  {
+    "NO": "7",
+    "NAMA SEKOLAH": "SDN KASREMAN",
+    "NAMA PROKTOR": "OPI ANDARISTA",
+    "EMAIL SEKOLAH": "sdn_kasreman@yahoo.com",
+    "NAMA PENANGGUNGJAWAB": "TRI YUONO, S.Pd",
+    "NIP PENANGGUNGJAWAB": "196509011985111001",
+    "NAMA TEKNISI": "OPI ANDARISTA,S.Pd",
+    "EMAIL TEKNISI": "opiandarista78@gmail.com",
+    "NAMA PENGAWAS": "M. ZAENAL ABIDIN, S.Pd.",
+    "NIP PENGAWAS": "19960122 202012 1 008",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220531",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220531",
+    "PASS BIOANSD": "20511733"
+  },
+  {
+    "NO": "8",
+    "NAMA SEKOLAH": "SDN JERUKWANGI",
+    "NAMA PROKTOR": "SHEILA MARGARETHA, S.Pd.",
+    "EMAIL SEKOLAH": "sdnjerukwangi@yahoo.com",
+    "NAMA PENANGGUNGJAWAB": "SUGENG WALUYO, S.Pd.",
+    "NIP PENANGGUNGJAWAB": "196712071994031010",
+    "NAMA TEKNISI": "NUR CHOLIS ABIDIN, S.Pd.",
+    "EMAIL TEKNISI": "choliez.annoer27@gmail.com",
+    "NAMA PENGAWAS": "MUNASIRIN, S. Pd. ",
+    "NIP PENGAWAS": "19830916 202321 1 004",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220532",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220532",
+    "PASS BIOANSD": "20512636"
+  },
+  {
+    "NO": "9",
+    "NAMA SEKOLAH": "SDN JERUKGULUNG",
+    "NAMA PROKTOR": "SEPTANTI PURWANINGTYAS,S.Pd.SD",
+    "EMAIL SEKOLAH": "sdn.jergul@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "NURWACHID, S.Pd.",
+    "NIP PENGAWAS": "19710813 200604 1 015",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220533",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220533",
+    "PASS BIOANSD": "20512637"
+  },
+  {
+    "NO": "10",
+    "NAMA SEKOLAH": "SDN KARANGTENGAH 1",
+    "NAMA PROKTOR": "MISBAKHUL MUNIR, S.Pd.",
+    "EMAIL SEKOLAH": "sdnkarangtengah1jaya@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "M. ANANG MAKRUF, S.Pd.I",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220534",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220534",
+    "PASS BIOANSD": "20511735"
+  },
+  {
+    "NO": "11",
+    "NAMA SEKOLAH": "SDN KARANGTENGAH 2",
+    "NAMA PROKTOR": "FASHIHUL LISAN, S.Pd",
+    "EMAIL SEKOLAH": "karangtengahsdn2@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "GIGIH HERY PRASETYO NUGROHO, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "19860816 201402 1 002",
+    "NAMA TEKNISI": "M. SURAHMAT, S.Pd",
+    "EMAIL TEKNISI": "rachmat13.kdn@gmail.com",
+    "NAMA PENGAWAS": "ENDAH SUSANTI",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220535",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220535",
+    "PASS BIOANSD": "20511734"
+  },
+  {
+    "NO": "12",
+    "NAMA SEKOLAH": "SDN KARANGTENGAH 3",
+    "NAMA PROKTOR": "PUJI SANTOSO",
+    "EMAIL SEKOLAH": "sdnkarangtengahtiga@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "DWI WULANDARI, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "198609142011012016",
+    "NAMA TEKNISI": "MISBAKHUL MUNIR, S.Pd.",
+    "EMAIL TEKNISI": "misbakhulmunir75@guru.sd.belajar.id",
+    "NAMA PENGAWAS": "EKA NUR UJI WAHYU SATRIYA, S.Pd",
+    "NIP PENGAWAS": "19870426 202421 1 009",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220536",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220536",
+    "PASS BIOANSD": "20554548"
+  },
+  {
+    "NO": "13",
+    "NAMA SEKOLAH": "SDN KARANGTENGAH 4",
+    "NAMA PROKTOR": "Ahmad Muzakki",
+    "EMAIL SEKOLAH": "karangtengah4.sdn@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "SYAFIIN, SHI",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220537",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220537",
+    "PASS BIOANSD": "20554549"
+  },
+  {
+    "NO": "14",
+    "NAMA SEKOLAH": "SDN KARANGTENGAH 5",
+    "NAMA PROKTOR": "Hartono",
+    "EMAIL SEKOLAH": "sdkarangtengahv@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "DWI WULANDARI,S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "198609142011012016",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "MUH. AMINUDIN,S.Pd.I",
+    "NIP PENGAWAS": "19840222 202221 1 001",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220538",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220538",
+    "PASS BIOANSD": "20554550"
+  },
+  {
+    "NO": "15",
+    "NAMA SEKOLAH": "SDN KEMIRI",
+    "NAMA PROKTOR": "FERDIANA LAILIYA ROHMA",
+    "EMAIL SEKOLAH": "sdnkemiri902@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "HERRY FITRIANTO,S.Pd",
+    "NIP PENANGGUNGJAWAB": "19830710 201101 1 011",
+    "NAMA TEKNISI": "MUSLIMIN,S.Pd",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "ANWAR BAHRUDIN, S.Pd",
+    "NIP PENGAWAS": "19850212 202321 1 005",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220539",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220539",
+    "PASS BIOANSD": "20511751"
+  },
+  {
+    "NO": "16",
+    "NAMA SEKOLAH": "SDN KLAMPISAN 1",
+    "NAMA PROKTOR": "FAIZAH ULFAH, S.Pd.SD",
+    "EMAIL SEKOLAH": "sdnnegeriklampisan1@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "TATAG BUDI HARSONO, S.Pd.",
+    "NIP PENANGGUNGJAWAB": "198101112009011005",
+    "NAMA TEKNISI": "HARTONO,S.Pd.",
+    "EMAIL TEKNISI": "hartono732@gmail.com",
+    "NAMA PENGAWAS": "RIZKA AGUSTINA",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220540",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220540",
+    "PASS BIOANSD": "20511711"
+  },
+  {
+    "NO": "17",
+    "NAMA SEKOLAH": "SDN KLAMPISAN 2",
+    "NAMA PROKTOR": "ANTO AMINUDIN HIMAWAN",
+    "EMAIL SEKOLAH": "sdnklampisan2@yahoo.com",
+    "NAMA PENANGGUNGJAWAB": "EKO PRASETYO, S.Or",
+    "NIP PENANGGUNGJAWAB": "198305052010011022",
+    "NAMA TEKNISI": "ALI MASHAR, S.Pd",
+    "EMAIL TEKNISI": "alimashar364@gmail.com",
+    "NAMA PENGAWAS": "FAUZIAH.S.Pd.I",
+    "NIP PENGAWAS": "",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220541",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220541",
+    "PASS BIOANSD": "20554551"
+  },
+  {
+    "NO": "18",
+    "NAMA SEKOLAH": "SDN MLANCU 1",
+    "NAMA PROKTOR": "SANTOSO",
+    "EMAIL SEKOLAH": "sdn_mlancu1@yahoo.co.id",
+    "NAMA PENANGGUNGJAWAB": "RENY FITRIAWATI, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "19830612 201101 2 016",
+    "NAMA TEKNISI": "DINA DARAYANI, S.Pd",
+    "EMAIL TEKNISI": "dinadarayani90@guru.sd.belajar.id",
+    "NAMA PENGAWAS": "CAHYANINGSIH, S.Pd.I., M.Pd.",
+    "NIP PENGAWAS": "19930117 202012 2 015",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220542",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220542",
+    "PASS BIOANSD": "20511781"
+  },
+  {
+    "NO": "19",
+    "NAMA SEKOLAH": "SDN MLANCU 2",
+    "NAMA PROKTOR": "Moh. Afandi",
+    "EMAIL SEKOLAH": "mlancu2.kdn@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "RENY FITRIAWATI, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "19830612 201101 2 016",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "SUGENG PRASETYO, S.Pd., SD",
+    "NIP PENGAWAS": "19790712 202521 1 017",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220543",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220543",
+    "PASS BIOANSD": "20511780"
+  },
+  {
+    "NO": "20",
+    "NAMA SEKOLAH": "SDN MLANCU 3",
+    "NAMA PROKTOR": "Yustito Ariragil",
+    "EMAIL SEKOLAH": "sdnmlancu3@ymail.com",
+    "NAMA PENANGGUNGJAWAB": "PUJO SETYO AJI, S.Pd",
+    "NIP PENANGGUNGJAWAB": "199207172019031008",
+    "NAMA TEKNISI": "SEVA DIAN PRAMANA,S.Pd",
+    "EMAIL TEKNISI": "sevadian4@gmail.com",
+    "NAMA PENGAWAS": "MOHAMAD NASIRUDIN, S.Pd.I",
+    "NIP PENGAWAS": "19800717 200901 1 008",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220544",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220544",
+    "PASS BIOANSD": "20554552"
+  },
+  {
+    "NO": "21",
+    "NAMA SEKOLAH": "SDN MLANCU 4",
+    "NAMA PROKTOR": "FEBRI TRI BUDI SATRIYA, S.Pd.",
+    "EMAIL SEKOLAH": "sdn.mlancu.04@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "DANDIK YUDI RISTANTO, S.Pd.",
+    "NIP PENGAWAS": "19840606 202221 1 001",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220545",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220545",
+    "PASS BIOANSD": "20554553"
+  },
+  {
+    "NO": "22",
+    "NAMA SEKOLAH": "SDN MEDOWO 1",
+    "NAMA PROKTOR": "APRILIYANTO RATIH SUKARNO, S.Pd",
+    "EMAIL SEKOLAH": "sdnmedowosatu@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "ANANDA FEBRI KUSUMA BAHRULI, S.Pd.",
+    "NIP PENANGGUNGJAWAB": "198802292010011001",
+    "NAMA TEKNISI": "DICKY ZAIN ASFIAUDDIN, S.Pd",
+    "EMAIL TEKNISI": "dickyzain.zain3@gmail.com",
+    "NAMA PENGAWAS": "LAILATUL BADRIYAH, S.Pd.I, M.Pd",
+    "NIP PENGAWAS": "19930104 202012 2 012",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220546",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220546",
+    "PASS BIOANSD": "20511827"
+  },
+  {
+    "NO": "23",
+    "NAMA SEKOLAH": "SDN MEDOWO 2",
+    "NAMA PROKTOR": "ANDRI ARIFIN",
+    "EMAIL SEKOLAH": "sdn.medowo02@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "ANANDA FEBRI KUSUMA BAHRULI, S.Pd.",
+    "NIP PENANGGUNGJAWAB": "198802292010011001",
+    "NAMA TEKNISI": "UMI FADILAH, S.Pd.",
+    "EMAIL TEKNISI": "umifadilah58@guru.sd.belajar.id",
+    "NAMA PENGAWAS": "TANTRI RIHADATUL AISY, S.Pd",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220547",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220547",
+    "PASS BIOANSD": "20511826"
+  },
+  {
+    "NO": "24",
+    "NAMA SEKOLAH": "SDN MEDOWO 3",
+    "NAMA PROKTOR": "RINI LESTARI, S.Pd",
+    "EMAIL SEKOLAH": "sdnmedowo3@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "HERIYANTO, S.Pd",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "HERU WIDIYATAMA, S.Pd.H",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "SINGGIH WIDODO, S.Pd",
+    "NIP PENGAWAS": "19861018 201903 1 004",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220548",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220548",
+    "PASS BIOANSD": "20511825"
+  },
+  {
+    "NO": "25",
+    "NAMA SEKOLAH": "SDN JLUMBANG",
+    "NAMA PROKTOR": "KUSWIYANTO",
+    "EMAIL SEKOLAH": "Kuswiyanto32@guru.sd.belajar.id",
+    "NAMA PENANGGUNGJAWAB": "SITI INDARTI, S.Pd.SD",
+    "NIP PENANGGUNGJAWAB": "197004192000122002",
+    "NAMA TEKNISI": "YOYOK PRASETYO UTOMO, S.Pd",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "RIFAI YASIN, S.Pd.I",
+    "NIP PENGAWAS": "19850227 202221 1 021",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220549",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220549",
+    "PASS BIOANSD": "20512617"
+  },
+  {
+    "NO": "26",
+    "NAMA SEKOLAH": "SDN BUKUR",
+    "NAMA PROKTOR": "RETNO SANTIKA DEWI, S.Pd.",
+    "EMAIL SEKOLAH": "retnodewi39@guru.sd.belajar.id",
+    "NAMA PENANGGUNGJAWAB": "EKO PRASETYO, S.Or.",
+    "NIP PENANGGUNGJAWAB": "19830505 201001 1 022",
+    "NAMA TEKNISI": "BAGUS WAHYU HUSODO, S.Pd.SD.",
+    "EMAIL TEKNISI": "bagushusodo22@gmail.com",
+    "NAMA PENGAWAS": "AGUNG EKO SAPUTRO , S.Pd",
+    "NIP PENGAWAS": "19870927 201903 1 001",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220550",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220550",
+    "PASS BIOANSD": "20512572"
+  },
+  {
+    "NO": "27",
+    "NAMA SEKOLAH": "SD YBPK GEDANGAN",
+    "NAMA PROKTOR": "NENZY NURANTY, S,Pd",
+    "EMAIL SEKOLAH": "sdybpkgedangan@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "NENZY NURANTY, S.Pd",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05220551",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05220551",
+    "PASS BIOANSD": "20512700"
+  },
+  {
+    "NO": "28",
+    "NAMA SEKOLAH": "SD ISLAM NURUL ULUM",
+    "NAMA PROKTOR": "LILIK KHAMIDAH WULANDARI",
+    "EMAIL SEKOLAH": "sdi.nurululum16@gmail.com",
+    "NAMA PENANGGUNGJAWAB": "",
+    "NIP PENANGGUNGJAWAB": "",
+    "NAMA TEKNISI": "",
+    "EMAIL TEKNISI": "",
+    "NAMA PENGAWAS": "SITI RIRIN CAHYANI",
+    "NIP PENGAWAS": "-",
+    "Bertugas Di": "******",
+    "USER ANBK": "D05221009",
+    "PASS ANBK": "*****",
+    "USER BIOANSD": "DJTM05221009",
+    "PASS BIOANSD": "69987680"
+  }
+];
+        
+        let currentSchoolData = null;
+
+        function searchSchool() {
+            const input = document.getElementById('schoolInput').value.trim().toUpperCase();
+            
+            if (!input) {
+                showErrorPopup();
+                return;
+            }
+            
+            const school = schoolDatabase.find(s => 
+                s["NAMA SEKOLAH"].toUpperCase() === input
+            );
+            
+            if (school) {
+                showSchoolDetails(school);
+            } else {
+                showErrorPopup();
+            }
+        }
+        
+        function showSchoolDetails(school) {
+            currentSchoolData = school;
+            document.getElementById('schoolName').textContent = school["NAMA SEKOLAH"];
+            document.getElementById('proktorName').textContent = school["NAMA PROKTOR"];
+            document.getElementById('userAnbk').textContent = school["USER ANBK"];
+            document.getElementById('passAnbk').textContent = school["PASS ANBK"];
+            document.getElementById('userBio').textContent = school["USER BIOANSD"];
+            document.getElementById('passBio').textContent = school["PASS BIOANSD"];
+            
+            document.getElementById('inputPage').classList.add('hidden');
+            document.getElementById('detailPage').classList.remove('hidden');
+        }
+        
+        function saveAsImage() {
+            // Create canvas element
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 800;
+            canvas.height = 600;
+            
+            // Fill background
+            ctx.fillStyle = '#6c5ce7';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add border
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 6;
+            ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+            
+            // Set text properties
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 32px Inter';
+            ctx.textAlign = 'center';
+            
+            // Add school name
+            ctx.fillText(currentSchoolData["NAMA SEKOLAH"], canvas.width / 2, 80);
+            
+            // Add proktor info
+            ctx.font = 'bold 20px Inter';
+            ctx.fillStyle = '#ffd93d';
+            ctx.fillText('Proktor: ' + currentSchoolData["NAMA PROKTOR"], canvas.width / 2, 120);
+            
+            // Add credentials
+            ctx.font = 'bold 18px Inter';
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'left';
+            
+            // ANBK Section
+            ctx.fillText('ANBK KEMDIKBUD', 50, 200);
+            ctx.font = '16px Inter';
+            ctx.fillText('Username: ' + currentSchoolData["USER ANBK"], 50, 230);
+            ctx.fillText('Password: ' + currentSchoolData["PASS ANBK"], 50, 260);
+            
+            // Bioportal Section
+            ctx.font = 'bold 18px Inter';
+            ctx.fillText('BIOPORTAL KEMDIKBUD', 50, 320);
+            ctx.font = '16px Inter';
+            ctx.fillText('Username: ' + currentSchoolData["USER BIOANSD"], 50, 350);
+            ctx.fillText('Password: ' + currentSchoolData["PASS BIOANSD"], 50, 380);
+            
+            // Convert to image and download
+            const link = document.createElement('a');
+            link.download = currentSchoolData["NAMA SEKOLAH"] + '_credentials.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        }
+        
+        function goToTeamPage() {
+            if (!currentSchoolData) return;
+            
+            // Populate team data
+            document.getElementById('namaPJ').textContent = currentSchoolData["NAMA PENANGGUNGJAWAB"] || 'Data tidak tersedia';
+            document.getElementById('nipPJ').textContent = currentSchoolData["NIP PENANGGUNGJAWAB"] || 'Data tidak tersedia';
+            document.getElementById('namaProktor').textContent = currentSchoolData["NAMA PROKTOR"];
+            document.getElementById('emailSekolah').textContent = currentSchoolData["EMAIL SEKOLAH"];
+            document.getElementById('namaTeknisi').textContent = currentSchoolData["NAMA TEKNISI"] || 'Data tidak tersedia';
+            document.getElementById('emailTeknisi').textContent = currentSchoolData["EMAIL TEKNISI"] || 'Data tidak tersedia';
+            document.getElementById('namaPengawas').textContent = currentSchoolData["NAMA PENGAWAS"];
+            document.getElementById('nipPengawas').textContent = currentSchoolData["NIP PENGAWAS"];
+            document.getElementById('tugasPengawas').textContent = currentSchoolData["Bertugas Di"];
+            
+            document.getElementById('detailPage').classList.add('hidden');
+            document.getElementById('teamPage').classList.remove('hidden');
+        }
+        
+        function goBackToDetail() {
+            document.getElementById('teamPage').classList.add('hidden');
+            document.getElementById('detailPage').classList.remove('hidden');
+        }
+        
+        function goToSocialPage() {
+            document.getElementById('teamPage').classList.add('hidden');
+            document.getElementById('socialPage').classList.remove('hidden');
+        }
+        
+        function goBackToTeam() {
+            document.getElementById('socialPage').classList.add('hidden');
+            document.getElementById('teamPage').classList.remove('hidden');
+        }
+        
+        function showErrorPopup() {
+            document.getElementById('errorPopup').style.display = 'flex';
+        }
+        
+        function closePopup() {
+            document.getElementById('errorPopup').style.display = 'none';
+            document.getElementById('schoolInput').focus();
+        }
+        
+        function goBack() {
+            document.getElementById('detailPage').classList.add('hidden');
+            document.getElementById('teamPage').classList.add('hidden');
+            document.getElementById('socialPage').classList.add('hidden');
+            document.getElementById('inputPage').classList.remove('hidden');
+            document.getElementById('schoolInput').value = '';
+            document.getElementById('schoolInput').focus();
+            currentSchoolData = null;
+        }
+        
+        // Event listener untuk Enter key
+        document.getElementById('schoolInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchSchool();
+            }
+        });
+        
+        // Focus pada input saat halaman dimuat
+        document.getElementById('schoolInput').focus();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9730a048d20d401e',t:'MTc1NTg0NzQyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
