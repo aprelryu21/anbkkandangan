@@ -180,10 +180,10 @@
         // Load data from local files
         async function loadData() {
             try {
-                const loginResponse = await fetch('./loginform.json');
+                const loginResponse = await fetch('/loginform.json');
                 loginData = await loginResponse.json();
                 
-                const databaseResponse = await fetch('./database.json');
+                const databaseResponse = await fetch('/database.json');
                 databaseData = await databaseResponse.json();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -228,7 +228,7 @@
 
         function playMusic() {
             try {
-                const audio = new Audio('./musik.mp3');
+                const audio = new Audio('/musik.mp3');
                 audio.play().catch(error => {
                     console.log('Audio autoplay prevented by browser policy. User interaction required.');
                 });
