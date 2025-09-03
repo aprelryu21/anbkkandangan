@@ -177,13 +177,13 @@
         let loginData = null;
         let databaseData = null;
 
-        // Load data from GitHub
+        // Load data from local files
         async function loadData() {
             try {
-                const loginResponse = await fetch('https://raw.githubusercontent.com/aprelryu21/anbkkandangan/main/LOGINFORM.json');
+                const loginResponse = await fetch('./loginform.json');
                 loginData = await loginResponse.json();
                 
-                const databaseResponse = await fetch('https://raw.githubusercontent.com/aprelryu21/anbkkandangan/main/DATABASE.json');
+                const databaseResponse = await fetch('./database.json');
                 databaseData = await databaseResponse.json();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -227,9 +227,14 @@
         });
 
         function playMusic() {
-            // Note: Due to browser security policies, audio cannot be played automatically
-            // This is a placeholder for the music functionality
-            console.log('Music would play from: https://github.com/aprelryu21/anbkkandangan/blob/main/KAYA(Sii)%20-%20Hunting%20Koruptor%20DANDADAN%20PARODI%20COVER%20INDO.mp3');
+            try {
+                const audio = new Audio('./musik.mp3');
+                audio.play().catch(error => {
+                    console.log('Audio autoplay prevented by browser policy. User interaction required.');
+                });
+            } catch (error) {
+                console.error('Error playing music:', error);
+            }
         }
 
         function showDashboard(schoolName) {
@@ -465,5 +470,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9795f39df1b1fd74',t:'MTc1NjkwOTg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97960cd25647409b',t:'MTc1NjkxMDkyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
