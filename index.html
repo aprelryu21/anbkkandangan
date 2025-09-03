@@ -5,46 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal ANBK SD 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
         :root {
-            --persona-yellow: #FFD700;
-            --persona-blue: #4169E1;
-            --persona-red: #DC143C;
-            --persona-green: #32CD32;
-            --persona-purple: #8A2BE2;
-            --persona-orange: #FF8C00;
+            --persona-yellow: #FFEB3B;
+            --persona-blue: #2196F3;
+            --persona-red: #F44336;
+            --persona-green: #4CAF50;
+            --persona-purple: #9C27B0;
+            --persona-orange: #FF9800;
+            --persona-black: #212121;
+            --persona-white: #FAFAFA;
         }
         
-        * {
+        .title-font {
             font-family: 'Orbitron', monospace;
         }
         
+        .data-font {
+            font-family: 'Arial', sans-serif;
+        }
+        
         .neobrutalism {
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px #000;
-            transition: all 0.2s ease;
+            border: 6px solid var(--persona-black);
+            box-shadow: 12px 12px 0px var(--persona-black);
+            transition: all 0.15s ease;
+            transform: rotate(-1deg);
         }
         
         .neobrutalism:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 10px 10px 0px #000;
+            transform: translate(-4px, -4px) rotate(0deg);
+            box-shadow: 16px 16px 0px var(--persona-black);
         }
         
         .neobrutalism-card {
-            border: 3px solid #000;
-            box-shadow: 6px 6px 0px #000;
-            transition: all 0.2s ease;
+            border: 6px solid var(--persona-black);
+            box-shadow: 16px 16px 0px var(--persona-black);
+            transition: all 0.15s ease;
+            transform: rotate(1deg);
         }
         
         .neobrutalism-card:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 8px 8px 0px #000;
+            transform: translate(-4px, -4px) rotate(-1deg);
+            box-shadow: 20px 20px 0px var(--persona-black);
         }
         
         .persona-bg {
-            background: linear-gradient(135deg, var(--persona-yellow) 0%, var(--persona-orange) 50%, var(--persona-red) 100%);
+            background: url('https://images.wallpapersden.com/image/download/persona-5-video-game_a2ZmbG6UmZqaraWkpJRobWllrWdma2U.jpg') center/cover no-repeat,
+                        linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #DC143C 100%);
+            background-attachment: fixed;
         }
         
         .modal-overlay {
@@ -77,25 +88,26 @@
 <body class="min-h-screen persona-bg">
     <!-- Login Page -->
     <div id="loginPage" class="min-h-screen flex items-center justify-center p-4">
-        <div class="bg-white neobrutalism p-8 w-full max-w-md">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="bg-white neobrutalism p-8 w-full max-w-md relative z-10">
             <div class="text-center mb-8">
-                <h1 class="text-3xl font-black text-black mb-2 glitch">PORTAL ANBK</h1>
-                <h2 class="text-xl font-bold text-gray-800">SD 2025</h2>
+                <h1 class="text-3xl font-black text-black mb-2 glitch title-font">PORTAL ANBK</h1>
+                <h2 class="text-xl font-bold text-gray-800 title-font">SD 2025</h2>
                 <div class="w-full h-1 bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 mt-4"></div>
             </div>
             
             <form id="loginForm" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-bold text-black mb-2">NAMA SEKOLAH</label>
-                    <input type="text" id="namaSekolah" class="w-full p-3 border-4 border-black font-bold text-black bg-yellow-200 focus:bg-yellow-300 focus:outline-none" placeholder="Masukkan Nama Sekolah">
+                    <label class="block text-sm font-bold text-black mb-2 title-font">NAMA SEKOLAH</label>
+                    <input type="text" id="namaSekolah" class="w-full p-3 border-4 border-black font-bold text-black bg-yellow-200 focus:bg-yellow-300 focus:outline-none uppercase" placeholder="Masukkan Nama Sekolah" style="text-transform: uppercase;">
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-bold text-black mb-2">NPSN</label>
-                    <input type="text" id="npsn" class="w-full p-3 border-4 border-black font-bold text-black bg-blue-200 focus:bg-blue-300 focus:outline-none" placeholder="Masukkan NPSN">
+                    <label class="block text-sm font-bold text-black mb-2 title-font">NPSN</label>
+                    <input type="text" id="npsn" class="w-full p-3 border-4 border-black font-bold text-black bg-blue-200 focus:bg-blue-300 focus:outline-none uppercase" placeholder="Masukkan NPSN" style="text-transform: uppercase;">
                 </div>
                 
-                <button type="submit" class="w-full bg-red-500 text-white font-black text-lg p-4 neobrutalism hover:bg-red-600 pulse-glow">
+                <button type="submit" class="w-full bg-red-500 text-white font-black text-lg p-4 neobrutalism hover:bg-red-600 pulse-glow title-font">
                     LOGIN
                 </button>
             </form>
@@ -109,56 +121,185 @@
     <!-- Dashboard Page -->
     <div id="dashboardPage" class="hidden min-h-screen">
         <!-- Header -->
-        <header class="bg-black text-white p-6 border-b-4 border-yellow-400">
-            <h1 id="schoolTitle" class="text-2xl md:text-4xl font-black text-center glitch"></h1>
-            <p class="text-center text-yellow-400 font-bold mt-2">Portal Informasi ANBK SD 2025</p>
+        <header class="bg-yellow-400 border-8 border-black p-8 transform -rotate-1 shadow-[16px_16px_0px_black] m-4">
+            <div class="bg-black border-4 border-white p-4 transform rotate-2 shadow-[8px_8px_0px_white]">
+                <h1 id="schoolTitle" class="text-2xl md:text-4xl font-black text-center text-yellow-400 title-font"></h1>
+                <p class="text-center text-yellow-300 font-bold mt-2 title-font">PORTAL INFORMASI ANBK SD 2025</p>
+            </div>
         </header>
 
         <!-- Main Content -->
-        <main class="container mx-auto p-6">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <main class="container mx-auto p-6 px-12 lg:px-24">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
                 <!-- Card 1: Tim ANBK -->
-                <div class="bg-yellow-400 neobrutalism-card p-6 cursor-pointer" onclick="showTimANBK()">
-                    <h3 class="font-black text-xl mb-2">TIM ANBK</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Data Diri Dari TIM ANBK Sekolah Anda</p>
+                <div class="bg-yellow-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-yellow-300 transform rotate-2 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showTimANBK()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">TIM ANBK</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Data Diri Dari TIM ANBK Sekolah Anda</p>
                 </div>
 
                 <!-- Card 2: Kelengkapan Berkas -->
-                <div class="bg-blue-400 neobrutalism-card p-6 cursor-pointer" onclick="showKelengkapanBerkas()">
-                    <h3 class="font-black text-xl mb-2">KELENGKAPAN BERKAS</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Kelengkapan Berkas Pelaksanaan ANBK Sekolah Anda</p>
+                <div class="bg-red-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-red-300 transform -rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:-rotate-2 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showKelengkapanBerkas()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform rotate-2 shadow-[6px_6px_0px_black]" style="clip-path: polygon(0% 5%, 95% 0%, 100% 95%, 5% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">KELENGKAPAN BERKAS</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Kelengkapan Berkas Pelaksanaan ANBK Sekolah Anda</p>
                 </div>
 
                 <!-- Card 3: Akun ANBK -->
-                <div class="bg-green-400 neobrutalism-card p-6 cursor-pointer" onclick="showAkunANBK()">
-                    <h3 class="font-black text-xl mb-2">AKUN ANBK</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Username dan Password Sekolah Anda Pada Portal Web ANBK</p>
+                <div class="bg-blue-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-blue-300 transform rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-2 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showAkunANBK()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-2 shadow-[6px_6px_0px_black]" style="clip-path: polygon(10% 0%, 100% 5%, 90% 100%, 0% 95%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">AKUN ANBK</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Informasi Username dan Password Sekolah Anda Pada Portal Web ANBK</p>
                 </div>
 
                 <!-- Card 4: Gladi Bersih -->
-                <div class="bg-purple-400 neobrutalism-card p-6 cursor-pointer" onclick="showGladiBersih()">
-                    <h3 class="font-black text-xl mb-2">GLADI BERSIH</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan Gladi Bersih ANBK Pada Sekolah Anda</p>
+                <div class="bg-green-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-green-300 transform -rotate-2 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showGladiBersih()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(5% 5%, 95% 0%, 100% 90%, 0% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19M17,12H7V10H17V12Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">GLADI BERSIH</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan Gladi Bersih ANBK Pada Sekolah Anda</p>
                 </div>
 
                 <!-- Card 5: Pelaksanaan ANBK -->
-                <div class="bg-red-400 neobrutalism-card p-6 cursor-pointer" onclick="showPelaksanaanANBK()">
-                    <h3 class="font-black text-xl mb-2">PELAKSANAAN ANBK</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan ANBK di Sekolah Anda</p>
+                <div class="bg-yellow-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-yellow-300 transform rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-0 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showPelaksanaanANBK()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(0% 10%, 90% 0%, 100% 95%, 10% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">PELAKSANAAN ANBK</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan ANBK di Sekolah Anda</p>
                 </div>
 
                 <!-- Card 6: Pengawas Silang -->
-                <div class="bg-orange-400 neobrutalism-card p-6 cursor-pointer" onclick="showPengawasSilang()">
-                    <h3 class="font-black text-xl mb-2">PENGAWAS SILANG</h3>
-                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pengawas Silang Sekolah Anda</p>
+                <div class="bg-red-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-red-300 transform -rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:-rotate-2 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="showPengawasSilang()">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform rotate-2 shadow-[6px_6px_0px_black]" style="clip-path: polygon(5% 0%, 100% 10%, 95% 100%, 0% 90%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">PENGAWAS SILANG</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menampilkan Informasi Pengawas Silang Sekolah Anda</p>
+                </div>
+
+                <!-- Card 7: Laporan Simulasi -->
+                <div class="bg-blue-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-blue-300 transform rotate-2 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="openDriveLink('https://drive.google.com/drive/folders/1R4-AKmKBjBR2jgRMtLZeWtu52Axecc_3?usp=sharing')">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 95%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M8,12V14H16V12H8M8,16V18H13V16H8Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">LAPORAN SIMULASI</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menuju Penyimpanan Drive Berisikan Laporan Simulasi ANBK Kecamatan Kandangan</p>
+                </div>
+
+                <!-- Card 8: SK TIM ANBK -->
+                <div class="bg-green-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-green-300 transform -rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:-rotate-2 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="openDriveLink('https://drive.google.com/drive/folders/1VyBujtR8zRRRuF9Vn80VkPqXWKPgnvpX?usp=sharing')">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform rotate-2 shadow-[6px_6px_0px_black]" style="clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 95%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">SK TIM ANBK</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menuju Penyimpanan Drive Berisikan Salinan SK TIM ANBK Kecamatan Kandangan</p>
+                </div>
+
+                <!-- Card 9: Laporan Gladi Bersih -->
+                <div class="bg-yellow-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-yellow-300 transform rotate-1 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-2 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="openDriveLink('https://drive.google.com/drive/folders/1BgoYAEP4HGSXQyiD8-ki29EHSyEJqONO?usp=sharing')">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-2 shadow-[6px_6px_0px_black]" style="clip-path: polygon(5% 10%, 90% 0%, 95% 90%, 0% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19M6,10V12H18V10H6M6,14V16H15V14H6Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">LAPORAN GLADI BERSIH</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menuju Penyimpanan Drive Berisikan Laporan Pelaksanaan Gladi Bersih ANBK Kecamatan Kandangan</p>
+                </div>
+
+                <!-- Card 10: Laporan Pelaksanaan -->
+                <div class="bg-red-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-red-300 transform -rotate-2 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="openDriveLink('https://drive.google.com/drive/folders/1Yyh-ybpff9X-GI_vVq5gtpvK93uHTMfS?usp=sharing')">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(0% 5%, 100% 0%, 95% 95%, 5% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M9,13V15H15V13H9M9,16V18H13V16H9Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">LAPORAN PELAKSANAAN</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menuju Penyimpanan Drive Berisikan Laporan Pelaksanaan ANBK Kecamatan Kandangan</p>
+                </div>
+
+                <!-- Card 11: Laporan Pengisian Survey -->
+                <div class="bg-blue-400 border-8 border-black p-6 cursor-pointer aspect-square flex flex-col justify-center items-center text-center hover:bg-blue-300 transform rotate-2 shadow-[16px_16px_0px_black] hover:shadow-[20px_20px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200" onclick="openDriveLink('https://drive.google.com/drive/folders/1CGHBE5SxxHb_6sRNuKvIa18kIgxh2QYb?usp=sharing')">
+                    <div class="bg-white border-4 border-black p-3 mb-3 transform -rotate-1 shadow-[6px_6px_0px_black]" style="clip-path: polygon(10% 5%, 95% 0%, 100% 90%, 0% 100%);">
+                        <svg class="w-12 h-12 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-black text-lg mb-2 text-black title-font">LAPORAN PENGISIAN SURVEY</h3>
+                    <p class="text-xs font-bold text-black data-font">Ketuk Kartu Untuk Menuju Penyimpanan Drive Berisikan Laporan Pengisian Survey Lingkungan Belajar Kecamatan Kandangan</p>
                 </div>
             </div>
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-red-400 border-8 border-black p-8 m-4 transform rotate-1 shadow-[16px_16px_0px_black]">
+            <div class="text-center">
+                <div class="bg-black border-4 border-white p-6 transform -rotate-2 shadow-[8px_8px_0px_white] mb-6">
+                    <h3 class="text-xl font-black mb-4 title-font text-yellow-400">WEBSITE PORTAL ANBK KECAMATAN KANDANGAN 2025</h3>
+                    <p class="text-sm font-bold text-white data-font">Website Ini Dibuat Dengan Kemumetan, Ditaburi Dengan Keruwetan, Dilapisi Kebingungan, dan Di Bagikan Dengan Kengeluan Oleh AprelRYU</p>
+                </div>
+                <div class="flex justify-center space-x-6">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/aprelryu" target="_blank" class="bg-pink-400 border-4 border-black p-4 transform rotate-2 shadow-[8px_8px_0px_black] hover:shadow-[12px_12px_0px_black] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/>
+                            </svg>
+                            <span class="font-black text-black data-font">INSTAGRAM</span>
+                        </div>
+                    </a>
+                    
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@aprelryu" target="_blank" class="bg-blue-400 border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_black] hover:shadow-[12px_12px_0px_black] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16.6,5.82S16.06,3.85 15.86,3.17C15.75,2.71 15.39,2.53 15.39,2.53L14.95,2.5C14.95,2.5 13.38,2.5 12.81,2.5C12.44,2.5 12.2,2.69 12.2,3.08L12.2,15.39C12.2,17.6 10.42,19.39 8.2,19.39C5.98,19.39 4.2,17.6 4.2,15.39C4.2,13.17 5.98,11.39 8.2,11.39C8.58,11.39 8.94,11.44 9.29,11.54L9.29,9.65C8.94,9.59 8.58,9.56 8.2,9.56C4.85,9.56 2.17,12.24 2.17,15.58C2.17,18.93 4.85,21.61 8.2,21.61C11.54,21.61 14.22,18.93 14.22,15.58L14.22,8.91C15.41,9.77 16.86,10.3 18.42,10.3L18.42,8.47C17.63,8.47 16.92,8.18 16.35,7.7C15.78,7.22 15.39,6.54 15.39,5.82L16.6,5.82Z"/>
+                            </svg>
+                            <span class="font-black text-black data-font">TIKTOK</span>
+                        </div>
+                    </a>
+                    
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/aprelryu" target="_blank" class="bg-green-400 border-4 border-black p-4 transform rotate-1 shadow-[8px_8px_0px_black] hover:shadow-[12px_12px_0px_black] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/>
+                            </svg>
+                            <span class="font-black text-black data-font">YOUTUBE</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Modal Overlay -->
     <div id="modalOverlay" class="hidden fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4">
-        <div id="modalContent" class="bg-white neobrutalism p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div id="modalContent" class="bg-white neobrutalism p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto transform rotate-0">
             <!-- Modal content will be inserted here -->
         </div>
     </div>
@@ -166,32 +307,282 @@
     <!-- Error Modal -->
     <div id="errorModal" class="hidden fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4">
         <div class="bg-red-500 text-white neobrutalism p-6 max-w-md w-full text-center">
-            <h3 class="font-black text-xl mb-4">ERROR!</h3>
-            <p class="font-bold mb-4">Data yang dimasukkan tidak ada, coba cek kembali atau tanyakan pada AprelRYU</p>
-            <button onclick="closeErrorModal()" class="bg-white text-red-500 font-black px-6 py-2 neobrutalism-card">OK</button>
+            <h3 class="font-black text-xl mb-4 title-font">ERROR!</h3>
+            <p class="font-bold mb-4 data-font">Data yang dimasukkan tidak ada, coba cek kembali atau tanyakan pada AprelRYU</p>
+            <button onclick="closeErrorModal()" class="bg-white text-red-500 font-black px-6 py-2 neobrutalism-card title-font">OK</button>
         </div>
     </div>
 
     <script>
         let currentSchoolData = null;
-        let loginData = null;
-        let databaseData = null;
+        
+        // Embedded login data
+        const loginData = [
+ {
+  "No.": 1,
+  "Nama Sekolah": "SDN KANDANGAN 1",
+  "NPSN": "20512627"
+ },
+ {
+  "No.": 2,
+  "Nama Sekolah": "SDN KANDANGAN 2",
+  "NPSN": "20512626"
+ },
+ {
+  "No.": 3,
+  "Nama Sekolah": "SDN KANDANGAN 3",
+  "NPSN": "20512625"
+ },
+ {
+  "No.": 4,
+  "Nama Sekolah": "SDN KANDANGAN 4",
+  "NPSN": "20554547"
+ },
+ {
+  "No.": 5,
+  "Nama Sekolah": "SDN BANARAN 1",
+  "NPSN": "20512815"
+ },
+ {
+  "No.": 6,
+  "Nama Sekolah": "SDN BANARAN 2",
+  "NPSN": "20512816"
+ },
+ {
+  "No.": 7,
+  "Nama Sekolah": "SDN KASREMAN",
+  "NPSN": "20511733"
+ },
+ {
+  "No.": 8,
+  "Nama Sekolah": "SDN JERUKWANGI",
+  "NPSN": "20512636"
+ },
+ {
+  "No.": 9,
+  "Nama Sekolah": "SDN JERUKGULUNG",
+  "NPSN": "20512637"
+ },
+ {
+  "No.": 10,
+  "Nama Sekolah": "SDN KARANGTENGAH 1",
+  "NPSN": "20511735"
+ },
+ {
+  "No.": 11,
+  "Nama Sekolah": "SDN KARANGTENGAH 3",
+  "NPSN": "20554548"
+ },
+ {
+  "No.": 12,
+  "Nama Sekolah": "SDN KARANGTENGAH 4",
+  "NPSN": "20554549"
+ },
+ {
+  "No.": 13,
+  "Nama Sekolah": "SDN KARANGTENGAH 5",
+  "NPSN": "20554550"
+ },
+ {
+  "No.": 14,
+  "Nama Sekolah": "SDN KEMIRI",
+  "NPSN": "20511751"
+ },
+ {
+  "No.": 15,
+  "Nama Sekolah": "SDN KLAMPISAN 1",
+  "NPSN": "20511711"
+ },
+ {
+  "No.": 16,
+  "Nama Sekolah": "SDN MLANCU 1",
+  "NPSN": "20511781"
+ },
+ {
+  "No.": 17,
+  "Nama Sekolah": "SDN MLANCU 2",
+  "NPSN": "20511780"
+ },
+ {
+  "No.": 18,
+  "Nama Sekolah": "SDN MLANCU 4",
+  "NPSN": "20554553"
+ },
+ {
+  "No.": 19,
+  "Nama Sekolah": "SDN MEDOWO 1",
+  "NPSN": "20511827"
+ },
+ {
+  "No.": 20,
+  "Nama Sekolah": "SDN MEDOWO 2",
+  "NPSN": "20511826"
+ },
+ {
+  "No.": 21,
+  "Nama Sekolah": "SDN MEDOWO 3",
+  "NPSN": "20511825"
+ },
+ {
+  "No.": 22,
+  "Nama Sekolah": "SDN JLUMBANG",
+  "NPSN": "20512617"
+ },
+ {
+  "No.": 23,
+  "Nama Sekolah": "SDN BUKUR",
+  "NPSN": "20512572"
+ },
+ {
+  "No.": 24,
+  "Nama Sekolah": "SD YBPK GEDANGAN",
+  "NPSN": "20512700"
+ },
+ {
+  "No.": 25,
+  "Nama Sekolah": "SD ISLAM NURUL ULUM",
+  "NPSN": "69987680"
+ }
+];
 
-        // Load data from local files
-        async function loadData() {
-            try {
-                const loginResponse = await fetch('/loginform.json');
-                loginData = await loginResponse.json();
-                
-                const databaseResponse = await fetch('/database.json');
-                databaseData = await databaseResponse.json();
-            } catch (error) {
-                console.error('Error loading data:', error);
+        // Embedded database data
+        const databaseData = [
+            {
+                "NO": 1,
+                "Nama Sekolah": "SDN KANDANGAN 1",
+                "NPSN": 20512627,
+                "KODE SEKOLAH": "D05220525",
+                "Status Sekolah": "Negeri",
+                "Moda Pelaksanaan": "Mandiri Online",
+                "Jumlah Peserta": 30,
+                "Gelombang": "Gelombang 1",
+                "Jumlah Sesi": 2,
+                "Nama Penanggungjawab": "SUNARKO PRASETYO, S.Pd.",
+                "NO HP Penanggungjawab": 85856702950,
+                "Email Penanggungjawab": "sdn.kand1@gmail.com",
+                "Nama Proktor": "EMY KUSUMAWATI, S.Pd.",
+                "No HP Proktor": 85859939059,
+                "Email Proktor": "emykusumawati10@gmail.com",
+                "Nama Teknisi": "ELFRIDUS M. L. AMA HELAN, S.Pd.",
+                "No HP Teknisi": 85785858037,
+                "Email Teknisi": "elfridusama@gmail.com",
+                "Nama Pengawas": "AGUSTIN MILA IKA MUNAWAROH, S.Pd.",
+                "Username Portal": "DJTM05220525",
+                "Password Portal": 20512627,
+                "Username ANBK": "D05220525",
+                "NAMA PENGAWAS SILANG": "PUTRI PUSPITA SARI, S.Pd.",
+                "NIP PENGAWAS SILANG": "-",
+                "ASAL SEKOLAH": "SDN KANDANGAN 3"
+            },
+            {
+                "NO": 2,
+                "Nama Sekolah": "SDN KANDANGAN 2",
+                "NPSN": 20512626,
+                "KODE SEKOLAH": "D05220526",
+                "Status Sekolah": "Negeri",
+                "Moda Pelaksanaan": "Mandiri Online",
+                "Jumlah Peserta": 28,
+                "Gelombang": "Gelombang 1",
+                "Jumlah Sesi": 2,
+                "Nama Penanggungjawab": "AGUS SANTOSO, S. Pd.",
+                "NO HP Penanggungjawab": 81553957957,
+                "Email Penanggungjawab": "kandangan2.sdn@gmail.com",
+                "Nama Proktor": "NANING SUGIARTI, S. Pd.",
+                "No HP Proktor": 85746779748,
+                "Email Proktor": "naning9080@gmail.com",
+                "Nama Teknisi": "LENI KRISTIANA, S. Pd.",
+                "No HP Teknisi": 85749473384,
+                "Email Teknisi": "lenykristiana27@gmail.com",
+                "Nama Pengawas": "BAGUS WAFI'UDIN PRIAMBODO, S. Pd.",
+                "Username Portal": "DJTM05220526",
+                "Password Portal": 20512626,
+                "Username ANBK": "D05220526",
+                "NAMA PENGAWAS SILANG": "AGUSTIN MILA IKA MUNAWAROH, S.Pd.",
+                "NIP PENGAWAS SILANG": "-",
+                "ASAL SEKOLAH": "SDN KANDANGAN 1"
+            },
+            {
+                "NO": 3,
+                "Nama Sekolah": "SDN KANDANGAN 3",
+                "NPSN": 20512625,
+                "KODE SEKOLAH": "D05220527",
+                "Status Sekolah": "Negeri",
+                "Moda Pelaksanaan": "Mandiri Online",
+                "Jumlah Peserta": 25,
+                "Gelombang": "Gelombang 1",
+                "Jumlah Sesi": 2,
+                "Nama Penanggungjawab": "TIONO, S.Pd",
+                "NO HP Penanggungjawab": 81259993205,
+                "Email Penanggungjawab": "sdn3.kandangankdri@gmail.com",
+                "Nama Proktor": "NOVARISA ACA FUROIKHA, A.Md",
+                "No HP Proktor": 85732242488,
+                "Email Proktor": "novarisa23@gmail.com",
+                "Nama Teknisi": "MOH. NUR KHAFIT, S.Pd",
+                "No HP Teknisi": 85755694381,
+                "Email Teknisi": "Hafidznoer6242@gmail.com",
+                "Nama Pengawas": "PUTRI PUSPITA SARI, S.Pd.",
+                "Username Portal": "DJTM05220527",
+                "Password Portal": 20512625,
+                "Username ANBK": "D05220527",
+                "NAMA PENGAWAS SILANG": "BAGUS WAFI'UDIN PRIAMBODO, S. Pd.",
+                "NIP PENGAWAS SILANG": "-",
+                "ASAL SEKOLAH": "SDN KANDANGAN 2"
+            },
+            {
+                "NO": 4,
+                "Nama Sekolah": "SDN KANDANGAN 4",
+                "NPSN": 20554547,
+                "KODE SEKOLAH": "D05220528",
+                "Status Sekolah": "Negeri",
+                "Moda Pelaksanaan": "Mandiri Online",
+                "Jumlah Peserta": 32,
+                "Gelombang": "Gelombang 1",
+                "Jumlah Sesi": 2,
+                "Nama Penanggungjawab": "SRI RETNO WIDAYATI, S.Pd.SD",
+                "NO HP Penanggungjawab": 81234040729,
+                "Email Penanggungjawab": "sdn.kandangan4@gmail.com",
+                "Nama Proktor": "MUSTIKA DAMAYANTHI, S.Pd",
+                "No HP Proktor": 81335860540,
+                "Email Proktor": "damayanthi979@gmail.com",
+                "Nama Teknisi": "NINIK SULIS SETIANI, S.Pd.",
+                "No HP Teknisi": 81556468489,
+                "Email Teknisi": "nsulistian@gmail.com",
+                "Nama Pengawas": "Agus Anggara Putra, S.Pd",
+                "Username Portal": "DJTM05220528",
+                "Password Portal": 20554547,
+                "Username ANBK": "D05220528",
+                "NAMA PENGAWAS SILANG": "DWI KURNIA PUTRI, S.Or",
+                "NIP PENGAWAS SILANG": "-",
+                "ASAL SEKOLAH": "SDN BANARAN 1"
+            },
+            {
+                "NO": 5,
+                "Nama Sekolah": "SDN BANARAN 1",
+                "NPSN": 20512815,
+                "KODE SEKOLAH": "D05220529",
+                "Status Sekolah": "Negeri",
+                "Moda Pelaksanaan": "Mandiri Online",
+                "Jumlah Peserta": 27,
+                "Gelombang": "Gelombang 1",
+                "Jumlah Sesi": 2,
+                "Nama Penanggungjawab": "ANNY WALUYOWATI, S.Pd",
+                "NO HP Penanggungjawab": 85780461497,
+                "Email Penanggungjawab": "sdnbanaransiji@yahoo.com",
+                "Nama Proktor": "ELMA NURITA, S.Pd",
+                "No HP Proktor": 81515117040,
+                "Email Proktor": "elmanurita36@gmail.com",
+                "Nama Teknisi": "MOCHAMAD MIZAN ANSORI, S.Pd",
+                "No HP Teknisi": 85707204407,
+                "Email Teknisi": "mochamadmizan@gmail.com",
+                "Nama Pengawas": "DWI KURNIA PUTRI, S.Or",
+                "Username Portal": "DJTM05220529",
+                "Password Portal": 20512815,
+                "Username ANBK": "D05220529",
+                "NAMA PENGAWAS SILANG": "Agus Anggara Putra, S.Pd",
+                "NIP PENGAWAS SILANG": "-",
+                "ASAL SEKOLAH": "SDN KANDANGAN 4"
             }
-        }
-
-        // Initialize
-        loadData();
+        ];
 
         // Login form handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -207,17 +598,17 @@
             
             // Find matching school
             const school = loginData.find(item => 
-                item.nama_sekolah.toLowerCase() === namaSekolah.toLowerCase() && 
-                item.npsn === npsn
+                item["Nama Sekolah"].toLowerCase() === namaSekolah.toLowerCase() && 
+                item.NPSN === npsn
             );
             
             if (school) {
-                currentSchoolData = databaseData?.find(item => item.npsn === npsn);
+                currentSchoolData = databaseData?.find(item => item.NPSN == npsn);
                 if (currentSchoolData) {
                     // Play music
                     playMusic();
                     // Show dashboard
-                    showDashboard(school.nama_sekolah);
+                    showDashboard(school["Nama Sekolah"]);
                 } else {
                     showErrorModal();
                 }
@@ -228,7 +619,8 @@
 
         function playMusic() {
             try {
-                const audio = new Audio('/musik.mp3');
+                const audio = new Audio('https://cdn.jsdelivr.net/gh/aprelryu21/anbkkandangan@main/musik.mp3');
+                audio.loop = true;
                 audio.play().catch(error => {
                     console.log('Audio autoplay prevented by browser policy. User interaction required.');
                 });
@@ -265,35 +657,118 @@
             if (!currentSchoolData) return;
             
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">TIM ANBK</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                <div class="text-center mb-8">
+                    <div class="bg-yellow-400 border-8 border-black p-4 transform -rotate-2 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform rotate-1">👥 TIM ANBK</h2>
+                    </div>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-yellow-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">PENANGGUNG JAWAB</h3>
-                        <p><strong>Nama:</strong> ${currentSchoolData.penanggung_jawab?.nama || 'N/A'}</p>
-                        <p><strong>No HP:</strong> ${currentSchoolData.penanggung_jawab?.no_hp || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${currentSchoolData.penanggung_jawab?.email || 'N/A'}</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-yellow-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">PENANGGUNG JAWAB</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-blue-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NAMA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Nama Penanggungjawab"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NO HP:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["NO HP Penanggungjawab"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">EMAIL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Email Penanggungjawab"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-blue-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">PROKTOR</h3>
-                        <p><strong>Nama:</strong> ${currentSchoolData.proktor?.nama || 'N/A'}</p>
-                        <p><strong>No HP:</strong> ${currentSchoolData.proktor?.no_hp || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${currentSchoolData.proktor?.email || 'N/A'}</p>
+                    <div class="bg-blue-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">PROKTOR</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NAMA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Nama Proktor"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NO HP:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["No HP Proktor"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">EMAIL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Email Proktor"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-green-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">TEKNISI</h3>
-                        <p><strong>Nama:</strong> ${currentSchoolData.teknisi?.nama || 'N/A'}</p>
-                        <p><strong>No HP:</strong> ${currentSchoolData.teknisi?.no_hp || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${currentSchoolData.teknisi?.email || 'N/A'}</p>
+                    <div class="bg-green-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">TEKNISI</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NAMA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Nama Teknisi"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NO HP:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["No HP Teknisi"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">EMAIL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Email Teknisi"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-purple-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">PENGAWAS</h3>
-                        <p><strong>Nama:</strong> ${currentSchoolData.pengawas?.nama || 'N/A'}</p>
-                        <p><strong>No HP:</strong> ${currentSchoolData.pengawas?.no_hp || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${currentSchoolData.pengawas?.email || 'N/A'}</p>
+                    <div class="bg-purple-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">PENGAWAS</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NAMA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black text-xs">${currentSchoolData["Nama Pengawas"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">NO HP:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">N/A</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">EMAIL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">N/A</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('tim')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg rotate-1 hover:rotate-0">
+                        👥 SIMPAN SEBAGAI GAMBAR
+                    </button>
                 </div>
             `;
             showModal(content);
@@ -303,29 +778,111 @@
             if (!currentSchoolData) return;
             
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">KELENGKAPAN BERKAS</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                <div class="text-center mb-8">
+                    <div class="bg-blue-400 border-8 border-black p-4 transform rotate-2 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform -rotate-1">📋 KELENGKAPAN BERKAS</h2>
+                    </div>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-yellow-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">IDENTITAS SEKOLAH</h3>
-                        <p><strong>Nama Sekolah:</strong> ${currentSchoolData.nama_sekolah || 'N/A'}</p>
-                        <p><strong>NPSN:</strong> ${currentSchoolData.npsn || 'N/A'}</p>
-                        <p><strong>Kode Sekolah:</strong> ${currentSchoolData.kode_sekolah || 'N/A'}</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-yellow-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">IDENTITAS SEKOLAH</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-blue-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2 text-sm">NAMA SEKOLAH:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black text-xs">${currentSchoolData["Nama Sekolah"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2 text-sm">NPSN:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black text-xs">${currentSchoolData.NPSN || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">KODE SEKOLAH:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["KODE SEKOLAH"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-blue-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">STATUS INSTANSI</h3>
-                        <p><strong>Nama Sekolah:</strong> ${currentSchoolData.nama_sekolah || 'N/A'}</p>
-                        <p><strong>Status Sekolah:</strong> ${currentSchoolData.status_sekolah || 'N/A'}</p>
-                        <p><strong>Moda Pelaksanaan:</strong> ${currentSchoolData.moda_pelaksanaan || 'N/A'}</p>
+                    <div class="bg-blue-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">STATUS INSTANSI</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2 text-sm">NAMA SEKOLAH:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black text-xs">${currentSchoolData["Nama Sekolah"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">STATUS SEKOLAH:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Status Sekolah"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">MODA PELAKSANAAN:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black text-sm">${currentSchoolData["Moda Pelaksanaan"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-green-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">STATUS PELAKSANAAN</h3>
-                        <p><strong>Jumlah Peserta:</strong> ${currentSchoolData.jumlah_peserta || 'N/A'}</p>
-                        <p><strong>Gelombang:</strong> ${currentSchoolData.gelombang || 'N/A'}</p>
-                        <p><strong>Jumlah Sesi:</strong> ${currentSchoolData.jumlah_sesi || 'N/A'}</p>
+                    <div class="bg-green-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-lg title-font text-center text-black">STATUS PELAKSANAAN</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">JUMLAH PESERTA:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Jumlah Peserta"] || 'N/A'} SISWA</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">GELOMBANG:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Gelombang"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">JUMLAH SESI:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Jumlah Sesi"] || 'N/A'} SESI</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('berkas')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg -rotate-1 hover:rotate-0">
+                        📋 SIMPAN SEBAGAI GAMBAR
+                    </button>
                 </div>
             `;
             showModal(content);
@@ -335,75 +892,170 @@
             if (!currentSchoolData) return;
             
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">AKUN ANBK</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-yellow-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">PORTAL ANBK</h3>
-                        <p class="text-xs mb-2">https://bioportal.kemdikbud.go.id/</p>
-                        <p><strong>Username:</strong> ${currentSchoolData.username_portal || 'N/A'}</p>
-                        <p><strong>Password:</strong> ${currentSchoolData.password_portal || 'N/A'}</p>
+                <div class="text-center mb-8">
+                    <div class="bg-purple-400 border-8 border-black p-4 transform -rotate-2 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform rotate-1">🔐 AKUN ANBK</h2>
                     </div>
-                    <div class="bg-blue-400 neobrutalism-card p-4">
-                        <h3 class="font-black mb-2">WEB ANBK</h3>
-                        <p class="text-xs mb-2">https://anbk.kemdikbud.go.id/user</p>
-                        <p><strong>Username:</strong> ${currentSchoolData.username_anbk || 'N/A'}</p>
-                        <p><strong>Password:</strong> ${currentSchoolData.password_anbk || 'N/A'}</p>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-yellow-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">
+                                <a href="https://bioportal.kemdikbud.go.id" target="_blank" class="text-blue-600 hover:text-blue-800 underline">PORTAL ANBK</a>
+                            </h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">USERNAME:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Username Portal"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">PASSWORD:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Password Portal"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">
+                                <a href="https://anbk.kemdikbud.go.id/user" target="_blank" class="text-blue-600 hover:text-blue-800 underline">WEB ANBK</a>
+                            </h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-green-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">USERNAME:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData["Username ANBK"] || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black block mb-2">PASSWORD:</span>
+                                    <div class="bg-white border-2 border-black p-2">
+                                        <span class="font-black data-font text-black">${currentSchoolData.NPSN || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center mt-6">
-                    <button onclick="saveAsImage('akun')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
-                        SIMPAN SEBAGAI GAMBAR
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('akun')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg rotate-1 hover:rotate-0">
+                        🔐 SIMPAN SEBAGAI GAMBAR
                     </button>
                 </div>
             `;
             showModal(content);
         }
 
-        function getScheduleDates(gelombang, type) {
+        function getScheduleDates(type) {
             const schedules = {
-                gladi: {
-                    1: { hari1: 'Senin, 8 September 2025', hari2: 'Selasa, 9 September 2025' },
-                    2: { hari1: 'Rabu, 10 September 2025', hari2: 'Kamis, 11 September 2025' },
-                    3: { hari1: 'Senin, 15 September 2025', hari2: 'Selasa, 16 September 2025' },
-                    4: { hari1: 'Rabu, 17 September 2025', hari2: 'Kamis, 18 September 2025' }
-                },
-                pelaksanaan: {
-                    1: { hari1: 'Senin, 22 September 2025', hari2: 'Selasa, 23 September 2025' },
-                    2: { hari1: 'Rabu, 24 September 2025', hari2: 'Kamis, 25 September 2025' },
-                    3: { hari1: 'Senin, 29 September 2025', hari2: 'Selasa, 30 September 2025' },
-                    4: { hari1: 'Rabu, 1 Oktober 2025', hari2: 'Kamis, 2 Oktober 2025' }
-                }
+                gladi: { hari1: 'Senin, 8 September 2025', hari2: 'Selasa, 9 September 2025' },
+                pelaksanaan: { hari1: 'Senin, 22 September 2025', hari2: 'Selasa, 23 September 2025' }
             };
-            return schedules[type][gelombang] || { hari1: 'N/A', hari2: 'N/A' };
+            return schedules[type] || { hari1: 'N/A', hari2: 'N/A' };
         }
 
         function showGladiBersih() {
             if (!currentSchoolData) return;
             
-            const gelombang = parseInt(currentSchoolData.gelombang) || 1;
-            const dates = getScheduleDates(gelombang, 'gladi');
-            
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">GLADI BERSIH</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-purple-400 neobrutalism-card p-4 text-center">
-                        <h3 class="font-black mb-2">HARI PERTAMA</h3>
-                        <p class="text-lg font-bold">${dates.hari1}</p>
+                <div class="text-center mb-8">
+                    <div class="bg-green-400 border-8 border-black p-4 transform -rotate-2 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform rotate-1">GLADI BERSIH</h2>
                     </div>
-                    <div class="bg-pink-400 neobrutalism-card p-4 text-center">
-                        <h3 class="font-black mb-2">HARI KEDUA</h3>
-                        <p class="text-lg font-bold">${dates.hari2}</p>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-purple-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">HARI PERTAMA</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">GELOMBANG:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Gelombang"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">HARI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">SENIN</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">TANGGAL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">8 SEP 2025</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">PESERTA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Peserta"] || 'N/A'} SISWA</span>
+                                </div>
+                            </div>
+                            <div class="bg-orange-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">SESI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Sesi"] || 'N/A'} SESI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-pink-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">HARI KEDUA</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">GELOMBANG:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Gelombang"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">HARI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">SELASA</span>
+                                </div>
+                            </div>
+                            <div class="bg-red-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">TANGGAL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">9 SEP 2025</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">PESERTA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Peserta"] || 'N/A'} SISWA</span>
+                                </div>
+                            </div>
+                            <div class="bg-orange-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">SESI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Sesi"] || 'N/A'} SESI</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center mt-6">
-                    <button onclick="saveAsImage('gladi')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
-                        SIMPAN SEBAGAI GAMBAR
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('gladi')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg rotate-1 hover:rotate-0">
+                        💾 SIMPAN SEBAGAI GAMBAR
                     </button>
                 </div>
             `;
@@ -413,27 +1065,92 @@
         function showPelaksanaanANBK() {
             if (!currentSchoolData) return;
             
-            const gelombang = parseInt(currentSchoolData.gelombang) || 1;
-            const dates = getScheduleDates(gelombang, 'pelaksanaan');
-            
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">PELAKSANAAN ANBK</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-red-400 neobrutalism-card p-4 text-center">
-                        <h3 class="font-black mb-2">HARI PERTAMA</h3>
-                        <p class="text-lg font-bold">${dates.hari1}</p>
+                <div class="text-center mb-8">
+                    <div class="bg-yellow-400 border-8 border-black p-4 transform rotate-2 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform -rotate-1">PELAKSANAAN ANBK</h2>
                     </div>
-                    <div class="bg-orange-400 neobrutalism-card p-4 text-center">
-                        <h3 class="font-black mb-2">HARI KEDUA</h3>
-                        <p class="text-lg font-bold">${dates.hari2}</p>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-red-400 border-8 border-black p-8 transform -rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:-rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">HARI PERTAMA</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">GELOMBANG:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Gelombang"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">HARI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">SENIN</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">TANGGAL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">22 SEP 2025</span>
+                                </div>
+                            </div>
+                            <div class="bg-purple-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">PESERTA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Peserta"] || 'N/A'} SISWA</span>
+                                </div>
+                            </div>
+                            <div class="bg-pink-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">SESI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Sesi"] || 'N/A'} SESI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-orange-400 border-8 border-black p-8 transform rotate-2 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-1 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+                        <div class="bg-white border-4 border-black p-2 mb-6 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                            <h3 class="font-black text-xl title-font text-center text-black">HARI KEDUA</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-yellow-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">GELOMBANG:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Gelombang"] || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">HARI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">SELASA</span>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">TANGGAL:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">23 SEP 2025</span>
+                                </div>
+                            </div>
+                            <div class="bg-purple-300 border-4 border-black p-3 transform -rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">PESERTA:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Peserta"] || 'N/A'} SISWA</span>
+                                </div>
+                            </div>
+                            <div class="bg-pink-300 border-4 border-black p-3 transform rotate-1 shadow-[6px_6px_0px_black]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black data-font text-black">SESI:</span>
+                                    <span class="font-black data-font text-black bg-white px-3 py-1 border-2 border-black">${currentSchoolData["Jumlah Sesi"] || 'N/A'} SESI</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center mt-6">
-                    <button onclick="saveAsImage('pelaksanaan')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
-                        SIMPAN SEBAGAI GAMBAR
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('pelaksanaan')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg -rotate-1 hover:rotate-0">
+                        📋 SIMPAN SEBAGAI GAMBAR
                     </button>
                 </div>
             `;
@@ -444,23 +1161,165 @@
             if (!currentSchoolData) return;
             
             const content = `
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black">PENGAWAS SILANG</h2>
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                <div class="text-center mb-8">
+                    <div class="bg-orange-400 border-8 border-black p-4 transform -rotate-1 shadow-[12px_12px_0px_black] mb-6">
+                        <h2 class="text-3xl font-black title-font text-black transform rotate-2">PENGAWAS SILANG</h2>
+                    </div>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl font-black bg-red-500 text-white w-12 h-12 border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black] transform hover:-translate-x-1 hover:-translate-y-1">&times;</button>
                 </div>
-                <div class="bg-orange-400 neobrutalism-card p-6 text-center">
-                    <h3 class="font-black mb-4">INFORMASI PENGAWAS SILANG</h3>
-                    <p><strong>Nama:</strong> ${currentSchoolData.pengawas_silang?.nama || 'N/A'}</p>
-                    <p><strong>NIP:</strong> ${currentSchoolData.pengawas_silang?.nip || 'N/A'}</p>
-                    <p><strong>Asal Sekolah:</strong> ${currentSchoolData.pengawas_silang?.asal_sekolah || 'N/A'}</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-purple-400 border-8 border-black p-8 transform rotate-1 shadow-[20px_20px_0px_black] hover:shadow-[24px_24px_0px_black] hover:transform hover:rotate-0 hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200">
+
+                        <div class="space-y-6">
+                            <div class="bg-yellow-300 border-4 border-black p-4 transform rotate-1 shadow-[8px_8px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black text-lg block mb-2">👤 NAMA PENGAWAS</span>
+                                    <div class="bg-white border-2 border-black p-3 transform -rotate-1">
+                                        <span class="font-black data-font text-black text-xl">${currentSchoolData["NAMA PENGAWAS SILANG"] || 'AKAN DIUMUMKAN KEMUDIAN'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-300 border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black text-lg block mb-2">🆔 NIP PENGAWAS</span>
+                                    <div class="bg-white border-2 border-black p-3 transform rotate-1">
+                                        <span class="font-black data-font text-black text-xl">${currentSchoolData["NIP PENGAWAS SILANG"] || '-'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-green-300 border-4 border-black p-4 transform rotate-1 shadow-[8px_8px_0px_black]">
+                                <div class="text-center">
+                                    <span class="font-black data-font text-black text-lg block mb-2">🏫 ASAL SEKOLAH</span>
+                                    <div class="bg-white border-2 border-black p-3 transform -rotate-1">
+                                        <span class="font-black data-font text-black text-xl">${currentSchoolData["ASAL SEKOLAH"] || 'AKAN DIUMUMKAN KEMUDIAN'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <div class="bg-red-300 border-4 border-black p-4 transform rotate-2 shadow-[8px_8px_0px_black]">
+                                <p class="font-black data-font text-black text-sm">⚠️ PENGAWAS SILANG BERTUGAS MENGAWASI PELAKSANAAN ANBK DARI SEKOLAH LAIN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="saveAsImage('pengawas')" class="bg-red-500 text-white font-black px-8 py-4 border-6 border-black shadow-[12px_12px_0px_black] hover:shadow-[16px_16px_0px_black] transform hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 title-font text-lg -rotate-1 hover:rotate-0">
+                        👁️ SIMPAN SEBAGAI GAMBAR
+                    </button>
                 </div>
             `;
             showModal(content);
         }
 
         function saveAsImage(type) {
-            // This is a simplified version - in a real implementation, you'd use html2canvas or similar
-            alert('Fitur simpan gambar akan segera tersedia! Data telah disimpan ke clipboard.');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Create a temporary container with better styling for image capture
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.top = '0';
+            tempContainer.style.width = '1200px';
+            tempContainer.style.padding = '40px';
+            tempContainer.style.backgroundColor = '#f0f0f0';
+            tempContainer.style.fontFamily = 'Arial, sans-serif';
+            
+            // Clone the modal content
+            const clonedContent = modalContent.cloneNode(true);
+            
+            // Remove the close button from the clone
+            const closeButton = clonedContent.querySelector('button[onclick="closeModal()"]');
+            if (closeButton) {
+                closeButton.remove();
+            }
+            
+            // Add school name header to the image
+            const schoolHeader = document.createElement('div');
+            schoolHeader.className = 'bg-black text-yellow-400 p-6 text-center mb-6 border-8 border-yellow-400';
+            schoolHeader.innerHTML = `
+                <h1 class="text-3xl font-black title-font">${currentSchoolData["Nama Sekolah"] || 'SEKOLAH'}</h1>
+                <p class="text-xl font-bold mt-2">PORTAL ANBK SD 2025</p>
+                <p class="text-sm mt-2">Generated by AprelRYU Portal System</p>
+            `;
+            
+            tempContainer.appendChild(schoolHeader);
+            tempContainer.appendChild(clonedContent);
+            
+            // Add watermark
+            const watermark = document.createElement('div');
+            watermark.className = 'text-center mt-6 p-4 bg-gray-800 text-white';
+            watermark.innerHTML = `
+                <p class="font-bold">Generated from Portal ANBK Kecamatan Kandangan 2025</p>
+                <p class="text-sm">Created by AprelRYU - ${new Date().toLocaleDateString('id-ID')}</p>
+            `;
+            tempContainer.appendChild(watermark);
+            
+            document.body.appendChild(tempContainer);
+            
+            // Capture the image
+            html2canvas(tempContainer, {
+                width: 1200,
+                height: tempContainer.scrollHeight,
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#f0f0f0',
+                onclone: function(clonedDoc) {
+                    // Ensure fonts are loaded in the cloned document
+                    const clonedContainer = clonedDoc.querySelector('div');
+                    if (clonedContainer) {
+                        clonedContainer.style.fontFamily = 'Arial, sans-serif';
+                    }
+                }
+            }).then(function(canvas) {
+                // Remove temporary container
+                document.body.removeChild(tempContainer);
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = `ANBK_${type.toUpperCase()}_${currentSchoolData["Nama Sekolah"].replace(/\s+/g, '_')}_${new Date().getTime()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                
+                // Trigger download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message
+                showSuccessMessage('Gambar berhasil disimpan!');
+                
+            }).catch(function(error) {
+                // Remove temporary container on error
+                if (document.body.contains(tempContainer)) {
+                    document.body.removeChild(tempContainer);
+                }
+                console.error('Error generating image:', error);
+                alert('Terjadi kesalahan saat menyimpan gambar. Silakan coba lagi.');
+            });
+        }
+        
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 border-4 border-black shadow-[8px_8px_0px_black] z-50 font-black';
+            successDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span>✅</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                if (document.body.contains(successDiv)) {
+                    document.body.removeChild(successDiv);
+                }
+            }, 3000);
+        }
+
+        function openDriveLink(url) {
+            window.open(url, '_blank');
         }
 
         // Close modal when clicking outside
@@ -470,5 +1329,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97960cd25647409b',t:'MTc1NjkxMDkyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9796d46b04a4fdf7',t:'MTc1NjkxOTEwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
