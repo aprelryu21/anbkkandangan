@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal ANBK SD 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        :root {
+            --persona-yellow: #FFD700;
+            --persona-blue: #4169E1;
+            --persona-red: #DC143C;
+            --persona-green: #32CD32;
+            --persona-purple: #8A2BE2;
+            --persona-orange: #FF8C00;
+        }
+        
+        * {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .neobrutalism {
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px #000;
+            transition: all 0.2s ease;
+        }
+        
+        .neobrutalism:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0px #000;
+        }
+        
+        .neobrutalism-card {
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0px #000;
+            transition: all 0.2s ease;
+        }
+        
+        .neobrutalism-card:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 8px 8px 0px #000;
+        }
+        
+        .persona-bg {
+            background: linear-gradient(135deg, var(--persona-yellow) 0%, var(--persona-orange) 50%, var(--persona-red) 100%);
+        }
+        
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .glitch {
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--persona-yellow); }
+            50% { box-shadow: 0 0 40px var(--persona-yellow), 0 0 60px var(--persona-orange); }
+        }
+    </style>
+</head>
+<body class="min-h-screen persona-bg">
+    <!-- Login Page -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white neobrutalism p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-black text-black mb-2 glitch">PORTAL ANBK</h1>
+                <h2 class="text-xl font-bold text-gray-800">SD 2025</h2>
+                <div class="w-full h-1 bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 mt-4"></div>
+            </div>
+            
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-bold text-black mb-2">NAMA SEKOLAH</label>
+                    <input type="text" id="namaSekolah" class="w-full p-3 border-4 border-black font-bold text-black bg-yellow-200 focus:bg-yellow-300 focus:outline-none" placeholder="Masukkan Nama Sekolah">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-bold text-black mb-2">NPSN</label>
+                    <input type="text" id="npsn" class="w-full p-3 border-4 border-black font-bold text-black bg-blue-200 focus:bg-blue-300 focus:outline-none" placeholder="Masukkan NPSN">
+                </div>
+                
+                <button type="submit" class="w-full bg-red-500 text-white font-black text-lg p-4 neobrutalism hover:bg-red-600 pulse-glow">
+                    LOGIN
+                </button>
+            </form>
+            
+            <div class="text-center mt-6">
+                <p class="text-xs text-gray-600">Powered by AprelRYU</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="hidden min-h-screen">
+        <!-- Header -->
+        <header class="bg-black text-white p-6 border-b-4 border-yellow-400">
+            <h1 id="schoolTitle" class="text-2xl md:text-4xl font-black text-center glitch"></h1>
+            <p class="text-center text-yellow-400 font-bold mt-2">Portal Informasi ANBK SD 2025</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto p-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Card 1: Tim ANBK -->
+                <div class="bg-yellow-400 neobrutalism-card p-6 cursor-pointer" onclick="showTimANBK()">
+                    <h3 class="font-black text-xl mb-2">TIM ANBK</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Data Diri Dari TIM ANBK Sekolah Anda</p>
+                </div>
+
+                <!-- Card 2: Kelengkapan Berkas -->
+                <div class="bg-blue-400 neobrutalism-card p-6 cursor-pointer" onclick="showKelengkapanBerkas()">
+                    <h3 class="font-black text-xl mb-2">KELENGKAPAN BERKAS</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Kelengkapan Berkas Pelaksanaan ANBK Sekolah Anda</p>
+                </div>
+
+                <!-- Card 3: Akun ANBK -->
+                <div class="bg-green-400 neobrutalism-card p-6 cursor-pointer" onclick="showAkunANBK()">
+                    <h3 class="font-black text-xl mb-2">AKUN ANBK</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Username dan Password Sekolah Anda Pada Portal Web ANBK</p>
+                </div>
+
+                <!-- Card 4: Gladi Bersih -->
+                <div class="bg-purple-400 neobrutalism-card p-6 cursor-pointer" onclick="showGladiBersih()">
+                    <h3 class="font-black text-xl mb-2">GLADI BERSIH</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan Gladi Bersih ANBK Pada Sekolah Anda</p>
+                </div>
+
+                <!-- Card 5: Pelaksanaan ANBK -->
+                <div class="bg-red-400 neobrutalism-card p-6 cursor-pointer" onclick="showPelaksanaanANBK()">
+                    <h3 class="font-black text-xl mb-2">PELAKSANAAN ANBK</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pelaksanaan ANBK di Sekolah Anda</p>
+                </div>
+
+                <!-- Card 6: Pengawas Silang -->
+                <div class="bg-orange-400 neobrutalism-card p-6 cursor-pointer" onclick="showPengawasSilang()">
+                    <h3 class="font-black text-xl mb-2">PENGAWAS SILANG</h3>
+                    <p class="text-sm font-bold">Ketuk Kartu Untuk Menampilkan Informasi Pengawas Silang Sekolah Anda</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="hidden fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4">
+        <div id="modalContent" class="bg-white neobrutalism p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- Modal content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="hidden fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4">
+        <div class="bg-red-500 text-white neobrutalism p-6 max-w-md w-full text-center">
+            <h3 class="font-black text-xl mb-4">ERROR!</h3>
+            <p class="font-bold mb-4">Data yang dimasukkan tidak ada, coba cek kembali atau tanyakan pada AprelRYU</p>
+            <button onclick="closeErrorModal()" class="bg-white text-red-500 font-black px-6 py-2 neobrutalism-card">OK</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSchoolData = null;
+        let loginData = null;
+        let databaseData = null;
+
+        // Load data from GitHub
+        async function loadData() {
+            try {
+                const loginResponse = await fetch('https://raw.githubusercontent.com/aprelryu21/anbkkandangan/main/LOGINFORM.json');
+                loginData = await loginResponse.json();
+                
+                const databaseResponse = await fetch('https://raw.githubusercontent.com/aprelryu21/anbkkandangan/main/DATABASE.json');
+                databaseData = await databaseResponse.json();
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // Initialize
+        loadData();
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const namaSekolah = document.getElementById('namaSekolah').value.trim();
+            const npsn = document.getElementById('npsn').value.trim();
+            
+            if (!loginData) {
+                showErrorModal();
+                return;
+            }
+            
+            // Find matching school
+            const school = loginData.find(item => 
+                item.nama_sekolah.toLowerCase() === namaSekolah.toLowerCase() && 
+                item.npsn === npsn
+            );
+            
+            if (school) {
+                currentSchoolData = databaseData?.find(item => item.npsn === npsn);
+                if (currentSchoolData) {
+                    // Play music
+                    playMusic();
+                    // Show dashboard
+                    showDashboard(school.nama_sekolah);
+                } else {
+                    showErrorModal();
+                }
+            } else {
+                showErrorModal();
+            }
+        });
+
+        function playMusic() {
+            // Note: Due to browser security policies, audio cannot be played automatically
+            // This is a placeholder for the music functionality
+            console.log('Music would play from: https://github.com/aprelryu21/anbkkandangan/blob/main/KAYA(Sii)%20-%20Hunting%20Koruptor%20DANDADAN%20PARODI%20COVER%20INDO.mp3');
+        }
+
+        function showDashboard(schoolName) {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.remove('hidden');
+            document.getElementById('schoolTitle').textContent = `Data ANBK SD 2025 ${schoolName}`;
+        }
+
+        function showErrorModal() {
+            document.getElementById('errorModal').classList.remove('hidden');
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.add('hidden');
+        }
+
+        function showModal(content) {
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+
+        // Modal functions
+        function showTimANBK() {
+            if (!currentSchoolData) return;
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">TIM ANBK</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-yellow-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">PENANGGUNG JAWAB</h3>
+                        <p><strong>Nama:</strong> ${currentSchoolData.penanggung_jawab?.nama || 'N/A'}</p>
+                        <p><strong>No HP:</strong> ${currentSchoolData.penanggung_jawab?.no_hp || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${currentSchoolData.penanggung_jawab?.email || 'N/A'}</p>
+                    </div>
+                    <div class="bg-blue-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">PROKTOR</h3>
+                        <p><strong>Nama:</strong> ${currentSchoolData.proktor?.nama || 'N/A'}</p>
+                        <p><strong>No HP:</strong> ${currentSchoolData.proktor?.no_hp || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${currentSchoolData.proktor?.email || 'N/A'}</p>
+                    </div>
+                    <div class="bg-green-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">TEKNISI</h3>
+                        <p><strong>Nama:</strong> ${currentSchoolData.teknisi?.nama || 'N/A'}</p>
+                        <p><strong>No HP:</strong> ${currentSchoolData.teknisi?.no_hp || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${currentSchoolData.teknisi?.email || 'N/A'}</p>
+                    </div>
+                    <div class="bg-purple-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">PENGAWAS</h3>
+                        <p><strong>Nama:</strong> ${currentSchoolData.pengawas?.nama || 'N/A'}</p>
+                        <p><strong>No HP:</strong> ${currentSchoolData.pengawas?.no_hp || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${currentSchoolData.pengawas?.email || 'N/A'}</p>
+                    </div>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function showKelengkapanBerkas() {
+            if (!currentSchoolData) return;
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">KELENGKAPAN BERKAS</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-yellow-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">IDENTITAS SEKOLAH</h3>
+                        <p><strong>Nama Sekolah:</strong> ${currentSchoolData.nama_sekolah || 'N/A'}</p>
+                        <p><strong>NPSN:</strong> ${currentSchoolData.npsn || 'N/A'}</p>
+                        <p><strong>Kode Sekolah:</strong> ${currentSchoolData.kode_sekolah || 'N/A'}</p>
+                    </div>
+                    <div class="bg-blue-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">STATUS INSTANSI</h3>
+                        <p><strong>Nama Sekolah:</strong> ${currentSchoolData.nama_sekolah || 'N/A'}</p>
+                        <p><strong>Status Sekolah:</strong> ${currentSchoolData.status_sekolah || 'N/A'}</p>
+                        <p><strong>Moda Pelaksanaan:</strong> ${currentSchoolData.moda_pelaksanaan || 'N/A'}</p>
+                    </div>
+                    <div class="bg-green-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">STATUS PELAKSANAAN</h3>
+                        <p><strong>Jumlah Peserta:</strong> ${currentSchoolData.jumlah_peserta || 'N/A'}</p>
+                        <p><strong>Gelombang:</strong> ${currentSchoolData.gelombang || 'N/A'}</p>
+                        <p><strong>Jumlah Sesi:</strong> ${currentSchoolData.jumlah_sesi || 'N/A'}</p>
+                    </div>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function showAkunANBK() {
+            if (!currentSchoolData) return;
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">AKUN ANBK</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-yellow-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">PORTAL ANBK</h3>
+                        <p class="text-xs mb-2">https://bioportal.kemdikbud.go.id/</p>
+                        <p><strong>Username:</strong> ${currentSchoolData.username_portal || 'N/A'}</p>
+                        <p><strong>Password:</strong> ${currentSchoolData.password_portal || 'N/A'}</p>
+                    </div>
+                    <div class="bg-blue-400 neobrutalism-card p-4">
+                        <h3 class="font-black mb-2">WEB ANBK</h3>
+                        <p class="text-xs mb-2">https://anbk.kemdikbud.go.id/user</p>
+                        <p><strong>Username:</strong> ${currentSchoolData.username_anbk || 'N/A'}</p>
+                        <p><strong>Password:</strong> ${currentSchoolData.password_anbk || 'N/A'}</p>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <button onclick="saveAsImage('akun')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
+                        SIMPAN SEBAGAI GAMBAR
+                    </button>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function getScheduleDates(gelombang, type) {
+            const schedules = {
+                gladi: {
+                    1: { hari1: 'Senin, 8 September 2025', hari2: 'Selasa, 9 September 2025' },
+                    2: { hari1: 'Rabu, 10 September 2025', hari2: 'Kamis, 11 September 2025' },
+                    3: { hari1: 'Senin, 15 September 2025', hari2: 'Selasa, 16 September 2025' },
+                    4: { hari1: 'Rabu, 17 September 2025', hari2: 'Kamis, 18 September 2025' }
+                },
+                pelaksanaan: {
+                    1: { hari1: 'Senin, 22 September 2025', hari2: 'Selasa, 23 September 2025' },
+                    2: { hari1: 'Rabu, 24 September 2025', hari2: 'Kamis, 25 September 2025' },
+                    3: { hari1: 'Senin, 29 September 2025', hari2: 'Selasa, 30 September 2025' },
+                    4: { hari1: 'Rabu, 1 Oktober 2025', hari2: 'Kamis, 2 Oktober 2025' }
+                }
+            };
+            return schedules[type][gelombang] || { hari1: 'N/A', hari2: 'N/A' };
+        }
+
+        function showGladiBersih() {
+            if (!currentSchoolData) return;
+            
+            const gelombang = parseInt(currentSchoolData.gelombang) || 1;
+            const dates = getScheduleDates(gelombang, 'gladi');
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">GLADI BERSIH</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-purple-400 neobrutalism-card p-4 text-center">
+                        <h3 class="font-black mb-2">HARI PERTAMA</h3>
+                        <p class="text-lg font-bold">${dates.hari1}</p>
+                    </div>
+                    <div class="bg-pink-400 neobrutalism-card p-4 text-center">
+                        <h3 class="font-black mb-2">HARI KEDUA</h3>
+                        <p class="text-lg font-bold">${dates.hari2}</p>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <button onclick="saveAsImage('gladi')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
+                        SIMPAN SEBAGAI GAMBAR
+                    </button>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function showPelaksanaanANBK() {
+            if (!currentSchoolData) return;
+            
+            const gelombang = parseInt(currentSchoolData.gelombang) || 1;
+            const dates = getScheduleDates(gelombang, 'pelaksanaan');
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">PELAKSANAAN ANBK</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-red-400 neobrutalism-card p-4 text-center">
+                        <h3 class="font-black mb-2">HARI PERTAMA</h3>
+                        <p class="text-lg font-bold">${dates.hari1}</p>
+                    </div>
+                    <div class="bg-orange-400 neobrutalism-card p-4 text-center">
+                        <h3 class="font-black mb-2">HARI KEDUA</h3>
+                        <p class="text-lg font-bold">${dates.hari2}</p>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <button onclick="saveAsImage('pelaksanaan')" class="bg-red-500 text-white font-black px-6 py-3 neobrutalism-card">
+                        SIMPAN SEBAGAI GAMBAR
+                    </button>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function showPengawasSilang() {
+            if (!currentSchoolData) return;
+            
+            const content = `
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black">PENGAWAS SILANG</h2>
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl font-black">&times;</button>
+                </div>
+                <div class="bg-orange-400 neobrutalism-card p-6 text-center">
+                    <h3 class="font-black mb-4">INFORMASI PENGAWAS SILANG</h3>
+                    <p><strong>Nama:</strong> ${currentSchoolData.pengawas_silang?.nama || 'N/A'}</p>
+                    <p><strong>NIP:</strong> ${currentSchoolData.pengawas_silang?.nip || 'N/A'}</p>
+                    <p><strong>Asal Sekolah:</strong> ${currentSchoolData.pengawas_silang?.asal_sekolah || 'N/A'}</p>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function saveAsImage(type) {
+            // This is a simplified version - in a real implementation, you'd use html2canvas or similar
+            alert('Fitur simpan gambar akan segera tersedia! Data telah disimpan ke clipboard.');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9795f39df1b1fd74',t:'MTc1NjkwOTg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
